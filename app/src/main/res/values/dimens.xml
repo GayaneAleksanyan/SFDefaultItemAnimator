@@ -9,4 +9,9 @@
     <dimen name="text_view_textName_size">23sp</dimen>
     <dimen name="text_view_textDesc_size">16sp</dimen>
     <dimen name="linear_layout_margin_top">5dp</dimen>
+    <dimen name="layout_margin_top">20dp</dimen>
+    <dimen name="layout_margin_start">15dp</dimen>
+    <dimen name="layout_margin_end">15dp</dimen>
+    <dimen name="title_textSize">23sp</dimen>
+    <dimen name="content_textSize">18sp</dimen>
 </resources>

@@ -2,7 +2,7 @@ package com.skill_factory.unit4
 
 import androidx.recyclerview.widget.DiffUtil
 
-class ProductDiff(val oldList: ArrayList<Product>, val newList: ArrayList<Product>) :
+class ProductDiff(val oldList: ArrayList<Item>, val newList: ArrayList<Item>) :
     DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return oldList.size

@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
                     "Apple",
                     "Juicy Apple fruit, which is eaten fresh, serves as a raw material in cooking and for making drinks."
                 ),
+                Ad("Sale", "30% discount on Apples", "Sale", "desc", R.drawable.ic_apple, 0),
                 Product(
                     1,
                     R.drawable.ic_banana,
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
                     "Lemon",
                     "Lemons are eaten fresh, and are also used in the manufacture of confectionery and soft drinks, in the liquor and perfume industry."
                 ),
+                Ad("Ad", "Ad from partner", "Ad", "desc", R.drawable.ic_launcher_background, 1),
                 Product(
                     3,
                     R.drawable.ic_pear,
@@ -54,6 +56,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
         recyclerView.adapter = adapter
+
         val itemIndex = findViewById<EditText>(R.id.item_index)
         val add = findViewById<Button>(R.id.add)
         val change = findViewById<Button>(R.id.change)
@@ -63,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             return itemIndex.text.toString().toInt()
         }
 
-        fun updateData(newList: ArrayList<Product>) {
+        fun updateData(newList: ArrayList<Item>) {
             val oldList = adapter.data
             val productDiff = ProductDiff(oldList, newList)
             val diffResult = DiffUtil.calculateDiff(productDiff)
@@ -72,11 +75,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         add.setOnClickListener() {
-            val newList = arrayListOf<Product>()
+            val newList = arrayListOf<Item>()
             newList.addAll(adapter.data)
             newList.add(
-                getIndex(),
-                Product(adapter.data.size, R.drawable.ic_apple, "Apple", "Description")
+                getIndex(), Product(adapter.data.size, R.drawable.ic_apple, "Apple", "Description")
             )
             updateData(newList)
 
@@ -88,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         change.setOnClickListener() {
-            val newList = arrayListOf<Product>()
+            val newList = arrayListOf<Item>()
             newList.addAll(adapter.data)
             newList[getIndex()] =
                 Product(adapter.data.size, R.drawable.ic_orange, "Orange", "Description")
@@ -100,7 +102,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         remove.setOnClickListener() {
-            val newList = arrayListOf<Product>()
+            val newList = arrayListOf<Item>()
             newList.addAll(adapter.data)
             newList.removeAt(getIndex())
             updateData(newList)
