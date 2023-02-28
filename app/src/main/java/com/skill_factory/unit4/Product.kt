@@ -5,6 +5,4 @@ class Product(
     override var idIcon: Any,
     override var name: String,
     override var desc: String
-) : Item {
-
-}
+) : Item
