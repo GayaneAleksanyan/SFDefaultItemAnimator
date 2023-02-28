@@ -7,9 +7,9 @@
     
     <RelativeLayout
         android:layout_width="@dimen/relative_layout_width"
-        android:layout_height="80dp"
+        android:layout_height="@dimen/relative_layout_height"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="25dp">
+        android:layout_marginStart="@dimen/relative_layout_margin_start">
         
         <ImageView
             android:id="@+id/icon"
