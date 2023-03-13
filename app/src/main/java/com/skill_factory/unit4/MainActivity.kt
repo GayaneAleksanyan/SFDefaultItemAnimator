@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
+
         val adapter = ProductAdapter()
         adapter.setHasStableIds(true)
 
@@ -111,14 +111,14 @@ class MainActivity : AppCompatActivity() {
                 "It is one of the oldest food crops, and for tropical countries it is the most important food plant and the main export item."
             )
         )
+
         recyclerView.adapter = adapter
-        val callback = ItemTouchHelperCallback(recyclerView.adapter as ProductAdapter)
-        val touchHelper = ItemTouchHelper(callback)
-        touchHelper.attachToRecyclerView(recyclerView)
+
+        val itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(adapter))
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+
         val linearSnapHelper = LinearSnapHelper()
         linearSnapHelper.attachToRecyclerView(recyclerView)
-        val pagerSnapHelper = PagerSnapHelper()
-        pagerSnapHelper.attachToRecyclerView(recyclerView)
 
         var savePositionFirst = 0
         var savePositionLast = 0
@@ -169,7 +169,6 @@ class MainActivity : AppCompatActivity() {
                 scrollToEnd()
             }
         }
-
 
         val itemIndex = findViewById<EditText>(R.id.item_index)
         val add = findViewById<Button>(R.id.add)

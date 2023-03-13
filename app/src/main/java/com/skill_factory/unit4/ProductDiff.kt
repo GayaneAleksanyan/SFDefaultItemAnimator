@@ -17,10 +17,6 @@ class ProductDiff(val oldList: ArrayList<Item>, val newList: ArrayList<Item>) :
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val old = oldList[oldItemPosition]
-        val new = newList[newItemPosition]
-        return old.idIcon == new.idIcon &&
-                old.desc == new.desc &&
-                old.name == new.name
+        return oldList[oldItemPosition] == newList[newItemPosition]
     }
 }
