@@ -6,7 +6,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
         val adapter = ProductAdapter()
+        adapter.setHasStableIds(true)
+
         adapter.items = arrayListOf(
             Product(
                 0,
@@ -107,6 +112,13 @@ class MainActivity : AppCompatActivity() {
             )
         )
         recyclerView.adapter = adapter
+        val callback = ItemTouchHelperCallback(recyclerView.adapter as ProductAdapter)
+        val touchHelper = ItemTouchHelper(callback)
+        touchHelper.attachToRecyclerView(recyclerView)
+        val linearSnapHelper = LinearSnapHelper()
+        linearSnapHelper.attachToRecyclerView(recyclerView)
+        val pagerSnapHelper = PagerSnapHelper()
+        pagerSnapHelper.attachToRecyclerView(recyclerView)
 
         var savePositionFirst = 0
         var savePositionLast = 0
@@ -176,7 +188,7 @@ class MainActivity : AppCompatActivity() {
             diffResult.dispatchUpdatesTo(adapter)
         }
 
-        add.setOnClickListener() {
+        add.setOnClickListener {
             val newList = arrayListOf<Item>()
             newList.addAll(adapter.data)
             newList.add(
@@ -185,7 +197,7 @@ class MainActivity : AppCompatActivity() {
             updateData(newList)
         }
 
-        change.setOnClickListener() {
+        change.setOnClickListener {
             val newList = arrayListOf<Item>()
             newList.addAll(adapter.data)
             newList[getIndex()] =
@@ -193,7 +205,7 @@ class MainActivity : AppCompatActivity() {
             updateData(newList)
         }
 
-        remove.setOnClickListener() {
+        remove.setOnClickListener {
             val newList = arrayListOf<Item>()
             newList.addAll(adapter.data)
             newList.removeAt(getIndex())

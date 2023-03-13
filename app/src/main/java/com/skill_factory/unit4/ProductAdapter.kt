@@ -16,4 +16,9 @@ class ProductAdapter() : ListDelegationAdapter<List<Item>>() {
         notifyDataSetChanged()
     }
 
+    override fun getItemId(position: Int): Long {
+        return super.getItemId(position)
+        notifyDataSetChanged()
+    }
+
 }
